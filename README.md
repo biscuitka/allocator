@@ -32,5 +32,15 @@
 
 </details>
 
+_______
+
+<details>
+  <summary>ER диаграмма базы данных</summary> 
+<img src="allocator_DB.png" alt="allocatorDB" style="float: left; height: 400px;">
+</details>
+<br>
+
+<img src="endpoints.png" alt="endpoints" style="float: left; height: 250px;">
+
 
 

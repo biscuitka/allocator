@@ -8,13 +8,15 @@ DROP TABLE IF EXISTS resource_quotas CASCADE;
 CREATE TABLE IF NOT EXISTS districts
 (
     district_id    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    district_name  VARCHAR NOT NULL
+    district_name  VARCHAR NOT NULL,
+    CONSTRAINT unique_district_name UNIQUE (district_name)
     );
 
 CREATE TABLE IF NOT EXISTS resources
 (
     resource_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    resource_name VARCHAR NOT NULL
+    resource_name VARCHAR NOT NULL,
+    CONSTRAINT unique_resource_name UNIQUE (resource_name)
 );
 
 CREATE TABLE IF NOT EXISTS users
@@ -40,7 +42,7 @@ CREATE TABLE IF NOT EXISTS resource_requests
 (
     resource_request_id    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     resource_request_status VARCHAR NOT NULL,
-    resource_requests_quantity BIGINT NOT NULL,
+    resource_request_quantity BIGINT NOT NULL,
     resource_id  BIGINT NOT NULL,
     district_id BIGINT NOT NULL,
     application_id BIGINT NOT NULL,
@@ -58,7 +60,8 @@ CREATE TABLE IF NOT EXISTS resource_quotas
     resource_id  BIGINT NOT NULL,
     district_id BIGINT NOT NULL,
     CONSTRAINT fk_resource_quotas_to_districts FOREIGN KEY (district_id) REFERENCES districts (district_id),
-    CONSTRAINT fk_resource_quotas_to_resources FOREIGN KEY (resource_id) REFERENCES resources (resource_id)
+    CONSTRAINT fk_resource_quotas_to_resources FOREIGN KEY (resource_id) REFERENCES resources (resource_id),
+    CONSTRAINT unique_resource_id_district_id UNIQUE (resource_id, district_id)
     );
 
 
